@@ -28,7 +28,13 @@ export class CountryGridComponent implements OnInit {
       console.log(countries.keys());
     })
     console.log(this.countries());
-    for (let country of this.countries().length) {
+    
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index];
+      
+    }
+    
+    for (let country of this.countries()) {
       console.log(this.countries().region);
       this.regions.update(regions => [...regions, this.countries().region]);
     }
