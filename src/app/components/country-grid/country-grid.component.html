@@ -1,3 +1,6 @@
-<div>
-    <app-country-card [country]="country" *ngFor="let country of countries()" />
+<div class="country-container">  
+    <app-region-filter-dropdown />
+    <div class="country-grid-container">
+        <app-country-card [country]="country" *ngFor="let country of countries()" />
+    </div>
 </div>

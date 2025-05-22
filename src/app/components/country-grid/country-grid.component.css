@@ -1,0 +1,18 @@
+.country-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #777;
+    align-items: center;
+    padding: 1rem;
+}
+
+.country-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+app-region-filter-dropdown {
+    padding-bottom: 1rem;
+}
