@@ -1,8 +1,8 @@
-<!-- <div class="card flex justify-content-center">
-    <p-multiSelect 
-        [options]="regions" 
-        [(ngModel)]="selectedRegion" 
-        [filter]="true" 
-        optionLabel="region" 
+<div class="card flex justify-content-center">
+    <p-multiSelect
+        [options]="uniqueRegions" 
+        [(ngModel)]="selectedRegions" 
+        [filter]="true"
+        (onClick)="updateSelectedRegions()"
         placeholder="Select Regions" />
-</div> -->
+</div>

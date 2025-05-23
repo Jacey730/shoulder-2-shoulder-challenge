@@ -1,6 +1,6 @@
 <div class="country-container">  
-    <app-region-filter-dropdown />
+    <app-region-filter-dropdown (selectedRegionsEvent)="updateSelectedRegions($event)" [uniqueRegions]="uniqueRegions" />
     <div class="country-grid-container">
-        <app-country-card [country]="country" *ngFor="let country of countries()" />
+        <app-country-card [country]="country" *ngFor="let country of countryData" />
     </div>
 </div>

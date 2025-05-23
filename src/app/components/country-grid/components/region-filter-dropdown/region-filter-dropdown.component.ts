@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Signal, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 
@@ -9,11 +9,13 @@ import { MultiSelectModule } from 'primeng/multiselect';
   styleUrl: './region-filter-dropdown.component.css'
 })
 
-export class RegionFilterDropdownComponent implements OnInit {
-  @Input() regions = signal<Array<String>>([]);
-  selectedRegion = signal('')
+export class RegionFilterDropdownComponent {
+  @Input() uniqueRegions:  any
+  @Output() selectedRegionsEvent = new EventEmitter<Array<String>>();
 
-  ngOnInit(): void {
-    
+  selectedRegions: String[] = [];
+
+  updateSelectedRegions() {
+    this.selectedRegionsEvent.emit(this.selectedRegions);
   }
 }
