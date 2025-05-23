@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryDataService, CountryData } from './services/country-data.service';
-import { catchError } from 'rxjs';
+import { ShareCountryDataService } from '../../shared/services/share-country-data.service';
+import { catchError, Subject, takeUntil } from 'rxjs';
 import { CountryCardComponent } from './components/country-card/country-card.component';
 import { RegionFilterDropdownComponent } from "./components/region-filter-dropdown/region-filter-dropdown.component";
 
@@ -16,11 +17,23 @@ export class CountryGridComponent implements OnInit {
   countryData: CountryData[] = [];
   uniqueRegions: String[] = [];
   selectedRegions: String[] = [];
+  destroyed$ = new Subject<void>();
+  countriesFetched = false;
 
-  constructor(private countryDataService: CountryDataService) {}
+  constructor(
+    private countryDataService: CountryDataService,
+    private shareCountryDataService: ShareCountryDataService
+  ) {}
 
   ngOnInit(): void {
-    this.countryDataService.getCountryData().pipe(
+    if (!this.countriesFetched) {
+      this.fetchCountries();
+      this.countriesFetched = true;
+    }
+  }
+
+  fetchCountries(): void {
+    this.countryDataService.getCountryData().pipe(takeUntil(this.destroyed$),
       catchError((err) => {
         console.log(err); 
         throw err;
@@ -33,7 +46,16 @@ export class CountryGridComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.destroyed$.next();
+    this.destroyed$.complete();
+  }
+
   updateSelectedRegions(newSelectedRegions: String[]) {
     this.selectedRegions = newSelectedRegions;
+  }
+
+  sendUniqueRegions(uniqueRegions: any) {
+    this.shareCountryDataService.passRegionsToNewCountry(uniqueRegions);
   }
 }

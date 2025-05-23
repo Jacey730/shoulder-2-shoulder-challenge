@@ -1,1 +1,21 @@
-<p>new-country works!</p>
+<div class="new-country-container">
+    <form
+        [formGroup]="newCountryForm"
+        (ngSubmit)="onSubmit()"
+    >
+        <label for="name">Name: </label>
+        <input formControlName="name">
+        <label for="flag">Flag: </label>
+        <input formControlName="flag">
+        <label for="region">Region: </label>
+        <p-select
+            formControlName="selectedRegion"
+            [options]="uniqueRegions"
+            optionLabel="name"
+            placeholder="Select a Region"
+            (onClick)="getUniqueRegions()"
+            class="w-full md:w-56" />
+        <label for="population">Population: </label>
+        <input formControlName="population">
+    </form>
+</div>
