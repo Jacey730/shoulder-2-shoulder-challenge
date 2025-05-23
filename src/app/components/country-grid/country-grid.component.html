@@ -1,6 +1,14 @@
 <div class="country-container">  
     <app-region-filter-dropdown (selectedRegionsEvent)="updateSelectedRegions($event)" [uniqueRegions]="uniqueRegions" />
     <div class="country-grid-container">
-        <app-country-card [country]="country" *ngFor="let country of countryData" />
+        @for(country of countryData; track country.name) {
+            @if(selectedRegions.includes(country.region)) {
+                <app-country-card [country]="country" />
+            } @else {
+                @if(selectedRegions.length === 0) {
+                    <app-country-card [country]="country" />
+                }
+            }
+        }
     </div>
 </div>

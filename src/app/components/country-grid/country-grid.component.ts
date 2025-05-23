@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CountryDataService, CountryData } from './services/country-data.service';
 import { catchError } from 'rxjs';
 import { CountryCardComponent } from './components/country-card/country-card.component';
-import { NgFor, NgIf } from '@angular/common';
 import { RegionFilterDropdownComponent } from "./components/region-filter-dropdown/region-filter-dropdown.component";
 
 @Component({
   selector: 'app-country-cards',
-  imports: [NgFor, NgIf, CountryCardComponent, RegionFilterDropdownComponent],
+  imports: [CountryCardComponent, RegionFilterDropdownComponent],
   templateUrl: './country-grid.component.html',
   styleUrl: './country-grid.component.css'
 })
