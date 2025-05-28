@@ -1,5 +1,6 @@
-<div class="mb-4 p-8">
-    <p-card header= "{{ country.name.common }}">
+<div class="mb-4 p-8 card-div">
+    <p-card header= "{{ country.name.common }}"
+            [style]="{'width': '100%'}">
         <p class="m-0"><img class="flag" src="{{ country.flags.png }}" /></p>
         <p class="m-0">Region: {{ country.region }}</p>
         <p class="m-0">Population: {{ country.population | number }}</p>

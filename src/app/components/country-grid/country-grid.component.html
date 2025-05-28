@@ -1,5 +1,8 @@
 <div class="country-container">  
-    <app-region-filter-dropdown (selectedRegionsEvent)="updateSelectedRegions($event)" [uniqueRegions]="uniqueRegions" />
+    <div class="country-grid-header">
+        <app-region-filter-dropdown (selectedRegionsEvent)="updateSelectedRegions($event)" [uniqueRegions]="uniqueRegions" />
+        <a routerLink="/new-country"><button>New Country</button></a>
+    </div>
     <div class="country-grid-container">
         @for(country of countryData; track country.name) {
             @if(selectedRegions.includes(country.region)) {

@@ -17,7 +17,7 @@ export const routes: Routes = [
     {
         path: 'new-country',
         loadComponent: () => {
-            return import('./components/new-country/new-country.component').then((m) => m.NewCountryComponent)
+            return import('./components/country-grid/components/new-country/new-country.component').then((m) => m.NewCountryComponent)
         }
     }
 ];

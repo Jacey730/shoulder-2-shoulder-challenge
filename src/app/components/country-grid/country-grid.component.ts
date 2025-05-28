@@ -4,10 +4,11 @@ import { ShareCountryDataService } from '../../shared/services/share-country-dat
 import { catchError, Subject, takeUntil } from 'rxjs';
 import { CountryCardComponent } from './components/country-card/country-card.component';
 import { RegionFilterDropdownComponent } from "./components/region-filter-dropdown/region-filter-dropdown.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-country-cards',
-  imports: [CountryCardComponent, RegionFilterDropdownComponent],
+  imports: [CountryCardComponent, RegionFilterDropdownComponent, RouterLink],
   templateUrl: './country-grid.component.html',
   styleUrl: './country-grid.component.css'
 })

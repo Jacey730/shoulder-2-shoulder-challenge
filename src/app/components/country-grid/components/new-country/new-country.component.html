@@ -1,10 +1,14 @@
 <div class="new-country-container">
     <form
         [formGroup]="newCountryForm"
+        class="card flex justify center"
         (ngSubmit)="onSubmit()"
     >
         <label for="name">Name: </label>
-        <input formControlName="name">
+        <input
+            type="text"
+            pInputText formControlName="name"
+        />
         <label for="flag">Flag: </label>
         <input formControlName="flag">
         <label for="region">Region: </label>
