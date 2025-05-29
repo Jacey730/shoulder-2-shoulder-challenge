@@ -2,13 +2,15 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { InputText } from 'primeng/inputtext';
+import { InputNumber } from 'primeng/inputnumber';
 import { Dialog } from 'primeng/dialog';
 import { Button } from 'primeng/button';
 import { CountryData } from '../../../../shared/services/country-data.service';
+import { Message } from 'primeng/message';
 
 @Component({
   selector: 'app-new-country',
-  imports: [ReactiveFormsModule, Select, InputText, Dialog, Button],
+  imports: [ReactiveFormsModule, Select, InputText, Dialog, Button, InputNumber, Message],
   templateUrl: './new-country.component.html',
   styleUrl: './new-country.component.css'
 })

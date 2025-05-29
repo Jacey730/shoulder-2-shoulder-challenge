@@ -5,7 +5,7 @@
     (visibleChange)="toggleNewCountryButton()"
     [style]="{ width: '25rem' }"
 >
-    <form [formGroup]="newCountryForm">
+    <form [formGroup]="newCountryForm" class="new-country-form">
         <div class="flex items-center gap-4 mb-4">
             <label for="name" class="font-semibold w-24">Name: </label>
             <input
@@ -14,14 +14,15 @@
                 autocomplete="off"
                 formControlName="name"
                 placeholder="Enter country name"
+                [style]="{margin: '0.25rem 2.5rem'}"
             />
             @if (newCountryForm.get('name')?.touched) {
                 @if (newCountryForm.get('name')?.hasError('required')) {
-                    <p class="invalid-input-message">Name is required.</p>
+                    <p-message severity='error'>Name is required.</p-message>
                 } @else if (newCountryForm.get('name')?.hasError('minlength')) {
-                    <p class="invalid-input-message">Name must be at least 3 characters.</p>
+                    <p-message severity='error'>Name must be at least 3 characters.</p-message>
                 } @else if (newCountryForm.get('name')?.hasError('maxlength') && newCountryForm.get('name')?.touched) {
-                    <p class="invalid-input-message">Name must be 50 characters or less.</p>
+                    <p-message severity='error'>Name must be 50 characters or less.</p-message>
                 }
             }
         </div>
@@ -33,12 +34,13 @@
                 autocomplete="off"
                 formControlName="flag"
                 placeholder="Enter flag image URL"
+                [style]="{margin: '0.25rem 3rem'}"
             />
             @if (newCountryForm.get('flag')?.touched) {
                 @if (newCountryForm.get('flag')?.hasError('required')) {
-                    <p class="invalid-input-message">Flag is required.</p>
+                    <p-message severity='error'>Flag is required.</p-message>
                 } @else if (newCountryForm.get('flag')?.hasError('invalidUrl')) {
-                    <p class="invalid-input-message">URL is invalid.</p>
+                    <p-message severity='error'>URL is invalid.</p-message>
                 }
             }
         </div>
@@ -49,31 +51,36 @@
                 [options]="uniqueRegions"
                 placeholder="Select a region"
                 appendTo="body"
+                [style]="{
+                            margin: '0.25rem 2rem',
+                            width: '12.2rem'
+                        }"
             />
             @if (newCountryForm.get('region')?.touched) {
                 @if (newCountryForm.get('region')?.hasError('required')) {
-                    <p class="invalid-input-message">Region is required.</p>
+                    <p-message severity='error'>Region is required.</p-message>
                 }
             }
         </div>
         <div class="flex items-center gap-4 mb-8">
             <label for="population" class="font-semibold w-24">Population: </label>
-            <input
-                pInputText id="population"
+            <p-inputnumber
+                inputId="population"
                 class="flex-auto"
                 autocomplete="off"
                 formControlName="population"
                 placeholder="Enter population"
+                [style]="{margin: '0.25rem 0.5rem'}"
             />
             @if (newCountryForm.get('population')?.touched) {
                 @if (newCountryForm.get('population')?.hasError('required')) {
-                    <p class="invalid-input-message">Population is required.</p>
+                    <p-message severity='error'>Population is required.</p-message>
                 } @else if (newCountryForm.get('population')?.hasError('negative')) {
-                    <p class="invalid-input-message">Population must be a positive number.</p>
+                    <p-message severity='error'>Population must be a positive number.</p-message>
                 }
             }
         </div>
-        <div class="flex justify-end gap-2">
+        <div class="flex justify-end gap-2 w-full ">
             <p-button
                 label="Cancel"
                 severity="secondary"
@@ -86,6 +93,7 @@
                 (click)="toggleNewCountryButton()"
                 (click)="onSubmit()"
                 [disabled]="!newCountryForm.valid"
+                [style]="{margin: '0 0 0 14rem'}"
             />
         </div>
     </form>

@@ -1,6 +1,9 @@
+<div class="card flex justify-center">
+    <p-toast />
+</div>
 <div class="country-container">  
     <div class="country-grid-header">
-        @if (!newCountryShown) {
+        @if (!newCountryDialogShown) {
             <button
                 class="new-country-button"
                 (click)="showNewCountryDialog()"
@@ -8,7 +11,7 @@
                 New Country
             </button>
         }
-        @if (newCountryShown) {
+        @if (newCountryDialogShown) {
             <app-new-country
                 (showNewCountryButton)="receiveNewCountryToggle($event)"
                 [uniqueRegions]="uniqueRegions"
