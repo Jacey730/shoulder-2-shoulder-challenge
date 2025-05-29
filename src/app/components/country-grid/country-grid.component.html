@@ -1,7 +1,24 @@
 <div class="country-container">  
     <div class="country-grid-header">
-        <app-region-filter-dropdown (selectedRegionsEvent)="updateSelectedRegions($event)" [uniqueRegions]="uniqueRegions" />
-        <a routerLink="/new-country"><button>New Country</button></a>
+        @if (!newCountryShown) {
+            <button
+                class="new-country-button"
+                (click)="showNewCountryDialog()"
+            >
+                New Country
+            </button>
+        }
+        @if (newCountryShown) {
+            <app-new-country
+                (showNewCountryButton)="receiveNewCountryToggle($event)"
+                [uniqueRegions]="uniqueRegions"
+                (passNewCountry)="receiveNewCountry($event)"
+            />
+        }
+        <app-region-filter-dropdown
+            (selectedRegionsEvent)="updateSelectedRegions($event)"
+            [uniqueRegions]="uniqueRegions"
+        />
     </div>
     <div class="country-grid-container">
         @for(country of countryData; track country.name) {

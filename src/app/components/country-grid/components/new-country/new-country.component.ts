@@ -1,20 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { Select } from 'primeng/select';
 import { InputText } from 'primeng/inputtext';
-import { ShareCountryDataService } from '../../../../shared/services/share-country-data.service';
+import { Dialog } from 'primeng/dialog';
+import { Button } from 'primeng/button';
+import { CountryData } from '../../../../shared/services/country-data.service';
 
 @Component({
   selector: 'app-new-country',
-  imports: [ReactiveFormsModule, Select, InputText],
+  imports: [ReactiveFormsModule, Select, InputText, Dialog, Button],
   templateUrl: './new-country.component.html',
   styleUrl: './new-country.component.css'
 })
-export class NewCountryComponent implements OnInit {
-  uniqueRegions: String[] = [];
+export class NewCountryComponent {
+  @Input() uniqueRegions:  any
+  @Output() showNewCountryButton = new EventEmitter<boolean>();
+  @Output() passNewCountry = new EventEmitter<any>();
+  
+  visible: boolean = true;
   newCountryForm: FormGroup;
+  newCountry: CountryData = {
+    name: {
+      common: ''
+    },
+    flags: {
+      png: ''
+    },
+    region: '',
+    population: ''
+  };
 
-  constructor(private fb: FormBuilder, private shareCountryDataService: ShareCountryDataService) {
+  constructor(private fb: FormBuilder) {
     this.newCountryForm = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50)])],
       flag: ['', Validators.compose([Validators.required, this.urlValidator()])],
@@ -23,13 +39,10 @@ export class NewCountryComponent implements OnInit {
     })
   }
 
-  ngOnInit() {
-    this.shareCountryDataService.uniqueRegions.subscribe(uniqueRegions => {
-      console.log(uniqueRegions);
-    })
+  toggleNewCountryButton () {
+      let newCountryShown = false;
+      this.showNewCountryButton.emit(newCountryShown);
   }
-
-  onSubmit() {}
 
   urlValidator(): ValidatorFn {
     return (control: AbstractControl) : {[key: string]: any} | null => {
@@ -45,15 +58,18 @@ export class NewCountryComponent implements OnInit {
   nonZeroValidator(): ValidatorFn {
     return (control: AbstractControl) : {[key: string]: any} | null => {
       if (Number(control.value) < 0) {
-        return {nonZero: true};
+        return {negative: true};
       } else {
         return null;
       }
     }
   }
 
-
-  getUniqueRegions() {
-
+  onSubmit() {
+    this.newCountry.name.common = this.newCountryForm.get('name')?.value;
+    this.newCountry.flags.png = this.newCountryForm.get('flag')?.value;
+    this.newCountry.region = this.newCountryForm.get('region')?.value;
+    this.newCountry.population = this.newCountryForm.get('population')?.value;
+    this.passNewCountry.emit(this.newCountry);
   }
 }

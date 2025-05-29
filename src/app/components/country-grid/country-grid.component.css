@@ -6,6 +6,18 @@
     padding: 1rem;
 }
 
+.country-grid-header {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+    flex-direction: column;
+}
+
+.new-country-button {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
 .country-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
@@ -13,9 +25,4 @@
     gap: 1rem;
     width: 100%;
     height: 100%;
-}
-
-app-region-filter-dropdown {
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
 }

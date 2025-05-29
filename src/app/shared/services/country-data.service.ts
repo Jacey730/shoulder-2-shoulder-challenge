@@ -6,18 +6,18 @@ export interface CountryData {
   name: Name;
   flags: Flags;
   region: string;
-  population: number;
+  population: string;
 }
 
 interface Name {
   common: string;
-  official: string;
+  official?: string;
 }
 
 interface Flags {
   png: string;
-  svg: string;
-  alt: string;
+  svg?: string;
+  alt?: string;
 }
 
 @Injectable({

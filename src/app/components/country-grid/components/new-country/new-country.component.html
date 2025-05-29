@@ -1,25 +1,92 @@
-<div class="new-country-container">
-    <form
-        [formGroup]="newCountryForm"
-        class="card flex justify center"
-        (ngSubmit)="onSubmit()"
-    >
-        <label for="name">Name: </label>
-        <input
-            type="text"
-            pInputText formControlName="name"
-        />
-        <label for="flag">Flag: </label>
-        <input formControlName="flag">
-        <label for="region">Region: </label>
-        <p-select
-            formControlName="selectedRegion"
-            [options]="uniqueRegions"
-            optionLabel="name"
-            placeholder="Select a Region"
-            (onClick)="getUniqueRegions()"
-            class="w-full md:w-56" />
-        <label for="population">Population: </label>
-        <input formControlName="population">
+<p-dialog
+    header="Add New Country"
+    [modal]="true"
+    [visible]="visible"
+    (visibleChange)="toggleNewCountryButton()"
+    [style]="{ width: '25rem' }"
+>
+    <form [formGroup]="newCountryForm">
+        <div class="flex items-center gap-4 mb-4">
+            <label for="name" class="font-semibold w-24">Name: </label>
+            <input
+                pInputText id="name"
+                class="flex-auto"
+                autocomplete="off"
+                formControlName="name"
+                placeholder="Enter country name"
+            />
+            @if (newCountryForm.get('name')?.touched) {
+                @if (newCountryForm.get('name')?.hasError('required')) {
+                    <p class="invalid-input-message">Name is required.</p>
+                } @else if (newCountryForm.get('name')?.hasError('minlength')) {
+                    <p class="invalid-input-message">Name must be at least 3 characters.</p>
+                } @else if (newCountryForm.get('name')?.hasError('maxlength') && newCountryForm.get('name')?.touched) {
+                    <p class="invalid-input-message">Name must be 50 characters or less.</p>
+                }
+            }
+        </div>
+        <div class="flex items-center gap-4 mb-8">
+            <label for="flag" class="font-semibold w-24">Flag: </label>
+            <input
+                pInputText id="flag"
+                class="flex-auto"
+                autocomplete="off"
+                formControlName="flag"
+                placeholder="Enter flag image URL"
+            />
+            @if (newCountryForm.get('flag')?.touched) {
+                @if (newCountryForm.get('flag')?.hasError('required')) {
+                    <p class="invalid-input-message">Flag is required.</p>
+                } @else if (newCountryForm.get('flag')?.hasError('invalidUrl')) {
+                    <p class="invalid-input-message">URL is invalid.</p>
+                }
+            }
+        </div>
+        <div class="flex items-center gap-4 mb-8">
+            <label for="region" class="font-semibold w-24">Region: </label>
+            <p-select
+                formControlName="region"
+                [options]="uniqueRegions"
+                placeholder="Select a region"
+                appendTo="body"
+            />
+            @if (newCountryForm.get('region')?.touched) {
+                @if (newCountryForm.get('region')?.hasError('required')) {
+                    <p class="invalid-input-message">Region is required.</p>
+                }
+            }
+        </div>
+        <div class="flex items-center gap-4 mb-8">
+            <label for="population" class="font-semibold w-24">Population: </label>
+            <input
+                pInputText id="population"
+                class="flex-auto"
+                autocomplete="off"
+                formControlName="population"
+                placeholder="Enter population"
+            />
+            @if (newCountryForm.get('population')?.touched) {
+                @if (newCountryForm.get('population')?.hasError('required')) {
+                    <p class="invalid-input-message">Population is required.</p>
+                } @else if (newCountryForm.get('population')?.hasError('negative')) {
+                    <p class="invalid-input-message">Population must be a positive number.</p>
+                }
+            }
+        </div>
+        <div class="flex justify-end gap-2">
+            <p-button
+                label="Cancel"
+                severity="secondary"
+                (click)="visible = false"
+                (click)="toggleNewCountryButton()" 
+            />
+            <p-button
+                label="Save"
+                (click)="visible = false"
+                (click)="toggleNewCountryButton()"
+                (click)="onSubmit()"
+                [disabled]="!newCountryForm.valid"
+            />
+        </div>
     </form>
-</div>
+</p-dialog>
