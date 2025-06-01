@@ -9,13 +9,23 @@
 .country-grid-header {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 1rem;
     padding-bottom: 1rem;
-    flex-direction: column;
 }
 
 .new-country-button {
-    margin-bottom: 1rem;
     padding: 0.5rem;
+    width: 50%;
+    transition: transform 200ms ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+.country-filter-container {
+    display: flex;
 }
 
 .country-grid-container {

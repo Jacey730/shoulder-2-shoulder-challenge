@@ -41,7 +41,7 @@ export class NewCountryComponent {
     })
   }
 
-  toggleNewCountryButton () {
+  closeDialog () {
       let newCountryShown = false;
       this.showNewCountryButton.emit(newCountryShown);
   }

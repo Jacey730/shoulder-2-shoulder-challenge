@@ -2,7 +2,7 @@
     header="Add New Country"
     [modal]="true"
     [visible]="visible"
-    (visibleChange)="toggleNewCountryButton()"
+    (visibleChange)="closeDialog()"
     [style]="{ width: '25rem' }"
 >
     <form [formGroup]="newCountryForm" class="new-country-form">
@@ -85,12 +85,12 @@
                 label="Cancel"
                 severity="secondary"
                 (click)="visible = false"
-                (click)="toggleNewCountryButton()" 
+                (click)="closeDialog()" 
             />
             <p-button
                 label="Save"
                 (click)="visible = false"
-                (click)="toggleNewCountryButton()"
+                (click)="closeDialog()"
                 (click)="onSubmit()"
                 [disabled]="!newCountryForm.valid"
                 [style]="{margin: '0 0 0 14rem'}"

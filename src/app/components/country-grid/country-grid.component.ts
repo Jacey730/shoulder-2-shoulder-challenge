@@ -6,10 +6,11 @@ import { RegionFilterDropdownComponent } from "./components/region-filter-dropdo
 import { NewCountryComponent } from './components/new-country/new-country.component';
 import { Toast } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { NameInputFilterComponent } from "./components/name-input-filter/name-input-filter.component";
 
 @Component({
   selector: 'app-country-cards',
-  imports: [CountryCardComponent, RegionFilterDropdownComponent, NewCountryComponent, Toast],
+  imports: [CountryCardComponent, RegionFilterDropdownComponent, NewCountryComponent, Toast, NameInputFilterComponent],
   templateUrl: './country-grid.component.html',
   styleUrl: './country-grid.component.css',
   providers: [MessageService]
@@ -20,6 +21,7 @@ export class CountryGridComponent implements OnInit {
   countryData: CountryData[] = [];
   uniqueRegions: String[] = [];
   selectedRegions: String[] = [];
+  nameInput: string = '';
   destroyed$ = new Subject<void>();
   countriesFetched = false;
   newCountryDialogShown: boolean = false;
@@ -67,5 +69,9 @@ export class CountryGridComponent implements OnInit {
   receiveNewCountry(newCountry: CountryData) {
     this.countryData.push(newCountry);
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'New country added successfully.', life: 3000});
+  }
+
+  updateSelectedNames(value: string) {
+    this.nameInput = value;
   }
 }
