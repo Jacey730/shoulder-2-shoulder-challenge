@@ -2,6 +2,22 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
 
+## Install Node.js
+
+If necessary, download and install Node.js from https://nodejs.org/en.
+
+## Install Angular CLI
+
+If necessary, install the Angular CLI globally by opening Command Prompt and running "npm-install -g @angular/cli".
+
+## Navigate to the project directory
+
+If necessary, navigate to the project directory by running "cd 'your directory'".
+
+## Install dependencies
+
+If necessary, install project dependencies by running "npm install".
+
 ## Development server
 
 To start a local development server, run:
